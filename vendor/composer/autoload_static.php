@@ -180,6 +180,7 @@ class ComposerStaticInite19b9bfb5d0ed0e39d64beddd8f044db
         array (
             'Brick\\Math\\' => 11,
             'Blueprint\\' => 10,
+            'Backpack\\ReviseOperation\\' => 25,
             'Backpack\\Pro\\' => 13,
             'Backpack\\PermissionManager\\' => 27,
             'Backpack\\Generators\\' => 20,
@@ -574,6 +575,10 @@ class ComposerStaticInite19b9bfb5d0ed0e39d64beddd8f044db
         array (
             0 => __DIR__ . '/..' . '/laravel-shift/blueprint/src',
         ),
+        'Backpack\\ReviseOperation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/backpack/revise-operation/src',
+        ),
         'Backpack\\Pro\\' => 
         array (
             0 => __DIR__ . '/..' . '/backpack/pro/src',
@@ -602,6 +607,13 @@ class ComposerStaticInite19b9bfb5d0ed0e39d64beddd8f044db
     );
 
     public static $prefixesPsr0 = array (
+        'V' => 
+        array (
+            'Venturecraft\\Revisionable' => 
+            array (
+                0 => __DIR__ . '/..' . '/venturecraft/revisionable/src',
+            ),
+        ),
         'M' => 
         array (
             'Mockery' => 
@@ -853,6 +865,8 @@ class ComposerStaticInite19b9bfb5d0ed0e39d64beddd8f044db
         'Backpack\\Pro\\Http\\Controllers\\Operations\\InlineCreateOperation' => __DIR__ . '/..' . '/backpack/pro/src/Http/Controllers/Operations/InlineCreateOperation.php',
         'Backpack\\Pro\\Http\\Controllers\\Operations\\Traits\\TrashFilter' => __DIR__ . '/..' . '/backpack/pro/src/Http/Controllers/Operations/Traits/TrashFilter.php',
         'Backpack\\Pro\\Http\\Controllers\\Operations\\TrashOperation' => __DIR__ . '/..' . '/backpack/pro/src/Http/Controllers/Operations/TrashOperation.php',
+        'Backpack\\ReviseOperation\\ReviseOperation' => __DIR__ . '/..' . '/backpack/revise-operation/src/ReviseOperation.php',
+        'Backpack\\ReviseOperation\\ReviseOperationServiceProvider' => __DIR__ . '/..' . '/backpack/revise-operation/src/ReviseOperationServiceProvider.php',
         'Blueprint\\Blueprint' => __DIR__ . '/..' . '/laravel-shift/blueprint/src/Blueprint.php',
         'Blueprint\\BlueprintServiceProvider' => __DIR__ . '/..' . '/laravel-shift/blueprint/src/BlueprintServiceProvider.php',
         'Blueprint\\Builder' => __DIR__ . '/..' . '/laravel-shift/blueprint/src/Builder.php',
@@ -1007,6 +1021,7 @@ class ComposerStaticInite19b9bfb5d0ed0e39d64beddd8f044db
         'Carbon\\TranslatorImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/TranslatorImmutable.php',
         'Carbon\\TranslatorStrongTypeInterface' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/TranslatorStrongTypeInterface.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'CreateRevisionsTable' => __DIR__ . '/..' . '/venturecraft/revisionable/src/migrations/2013_04_09_062329_create_revisions_table.php',
         'Creativeorange\\Gravatar\\Exceptions\\InvalidEmailException' => __DIR__ . '/..' . '/creativeorange/gravatar/src/Exceptions/InvalidEmailException.php',
         'Creativeorange\\Gravatar\\Facades\\Gravatar' => __DIR__ . '/..' . '/creativeorange/gravatar/src/Facades/Gravatar.php',
         'Creativeorange\\Gravatar\\Gravatar' => __DIR__ . '/..' . '/creativeorange/gravatar/src/Gravatar.php',
@@ -7180,6 +7195,11 @@ class ComposerStaticInite19b9bfb5d0ed0e39d64beddd8f044db
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
+        'Venturecraft\\Revisionable\\FieldFormatter' => __DIR__ . '/..' . '/venturecraft/revisionable/src/Venturecraft/Revisionable/FieldFormatter.php',
+        'Venturecraft\\Revisionable\\Revision' => __DIR__ . '/..' . '/venturecraft/revisionable/src/Venturecraft/Revisionable/Revision.php',
+        'Venturecraft\\Revisionable\\Revisionable' => __DIR__ . '/..' . '/venturecraft/revisionable/src/Venturecraft/Revisionable/Revisionable.php',
+        'Venturecraft\\Revisionable\\RevisionableServiceProvider' => __DIR__ . '/..' . '/venturecraft/revisionable/src/Venturecraft/Revisionable/RevisionableServiceProvider.php',
+        'Venturecraft\\Revisionable\\RevisionableTrait' => __DIR__ . '/..' . '/venturecraft/revisionable/src/Venturecraft/Revisionable/RevisionableTrait.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Webmozart\\Assert\\InvalidArgumentException' => __DIR__ . '/..' . '/webmozart/assert/src/InvalidArgumentException.php',
         'Webmozart\\Assert\\Mixin' => __DIR__ . '/..' . '/webmozart/assert/src/Mixin.php',

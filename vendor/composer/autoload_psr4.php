@@ -100,6 +100,7 @@ return array(
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
     'Blueprint\\' => array($vendorDir . '/laravel-shift/blueprint/src'),
+    'Backpack\\ReviseOperation\\' => array($vendorDir . '/backpack/revise-operation/src'),
     'Backpack\\Pro\\' => array($vendorDir . '/backpack/pro/src'),
     'Backpack\\PermissionManager\\' => array($vendorDir . '/backpack/permissionmanager/src'),
     'Backpack\\Generators\\' => array($vendorDir . '/backpack/generators/src'),
