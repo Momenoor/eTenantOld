@@ -30,7 +30,7 @@ use Spatie\Permission\Traits\HasRoles;
  *
  * @package App\Models
  */
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     use CrudTrait;
     use Notifiable;

@@ -15,3 +15,5 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('property') }}"><i class="nav-icon la la-question"></i> Properties</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('reciept') }}"><i class="nav-icon la la-question"></i> Reciepts</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('document') }}"><i class="nav-icon la la-question"></i> Documents</a></li>
+
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('user') }}'><i class='nav-icon la la-user'></i> <span>Users</span></a></li>
