@@ -1,1 +1,0 @@
-</<?php echo e($field['wrapper']['element'] ?? 'div'); ?>><?php /**PATH C:\wamp64\www\eTenant\resources\views/vendor/backpack/crud/fields/inc/wrapper_end.blade.php ENDPATH**/ ?>

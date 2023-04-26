@@ -1,2 +1,0 @@
-<li class='nav-item'><a class='nav-link' href='<?php echo e(backpack_url('devtools')); ?>'><i class='nav-icon la la-toolbox'></i> DevTools</a></li>
-<?php /**PATH C:\wamp64\www\eTenant\vendor\backpack\devtools\src/../resources/views/buttons/sidebar_item.blade.php ENDPATH**/ ?>
