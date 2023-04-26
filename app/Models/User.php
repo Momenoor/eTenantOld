@@ -9,10 +9,7 @@ namespace App\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Notifications\ResetPassword as ResetPasswordNotification;   /// New by ibrahim.suez
-use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -34,6 +31,7 @@ class User extends Authenticatable
 {
     use CrudTrait;
     use Notifiable;
+    use HasRoles;
 
     protected $table = 'users';
 
