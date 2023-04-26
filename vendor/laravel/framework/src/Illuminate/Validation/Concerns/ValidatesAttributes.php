@@ -25,7 +25,6 @@ use Illuminate\Validation\ValidationData;
 use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use ValueError;
 
 trait ValidatesAttributes
 {
@@ -551,14 +550,10 @@ trait ValidatesAttributes
         }
 
         foreach ($parameters as $format) {
-            try {
-                $date = DateTime::createFromFormat('!'.$format, $value);
+            $date = DateTime::createFromFormat('!'.$format, $value);
 
-                if ($date && $date->format($format) == $value) {
-                    return true;
-                }
-            } catch (ValueError) {
-                return false;
+            if ($date && $date->format($format) == $value) {
+                return true;
             }
         }
 
