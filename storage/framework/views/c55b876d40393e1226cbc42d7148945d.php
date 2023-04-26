@@ -1,0 +1,1 @@
+<?php echo $__env->make('backpack.devtools::livewire.relationship-schema._partial_model', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\eTenant\vendor\backpack\devtools\src/../resources/views/livewire/relationship-schema/hasmany.blade.php ENDPATH**/ ?>

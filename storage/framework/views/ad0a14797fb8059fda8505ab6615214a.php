@@ -1,0 +1,1 @@
+<a href="<?php echo e(url($crud->route.'/build-all-cruds')); ?>" class="btn btn-warning"><i class="la la-hammer"></i> Build All CRUDs</a><?php /**PATH C:\wamp64\www\eTenant\vendor\backpack\devtools\src/../resources/views/buttons/build_all_cruds.blade.php ENDPATH**/ ?>

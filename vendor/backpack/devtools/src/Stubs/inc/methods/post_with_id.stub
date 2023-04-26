@@ -1,0 +1,16 @@
+/**
+    * Method to handle the POST request and perform the operation
+    *
+    * @param  int  $id
+    * @return array|\Illuminate\Http\RedirectResponse
+    */
+    public function ___to_be_replaced_with_operation_name___Action(int $id)
+    {
+        $this->crud->hasAccessOrFail('___to_be_replaced_with_operation_name___');
+
+        $entry = $this->crud->getEntry($id);
+
+        // You logic goes here...
+
+        return true;
+    }

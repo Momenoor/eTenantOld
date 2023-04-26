@@ -1,0 +1,2 @@
+<a href="<?php echo e(url($crud->route.'/'.$entry->getKey().'/related-files/'.$crud->entity_name)); ?>" class="btn btn-sm btn-outline-primary"><i class="la la-eye"></i> See Files</a>
+<?php /**PATH C:\wamp64\www\eTenant\vendor\backpack\devtools\src/../resources/views/buttons/related_files.blade.php ENDPATH**/ ?>

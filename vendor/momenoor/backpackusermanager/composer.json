@@ -1,0 +1,53 @@
+{
+    "name": "momenoor/backpackusermanager",
+    "description": "Users management interface for Laravel using Backpack CRUD.",
+    "keywords": [
+        "laravel backpack",
+        "backpack user management",        
+        "backpack",        
+        "manage users",
+        "users admin",
+        "user management",
+        "laravel user management",
+        "Eduardo Aranda"
+    ],
+    "homepage": "https://github.com/momenoor/BackpackUserManager",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Momen Noor",
+            "email": "momen.noor@gmail.com",
+            "homepage": "https://mie.systems/"
+        }        
+    ],
+    "require": {
+        "backpack/crud": "^5.5.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "4.*",
+        "scrutinizer/ocular": "~1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "EduardoArandaH\\UserManager\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EduardoArandaH\\UserManager\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "EduardoArandaH\\UserManager\\UserManagerServiceProvider"
+            ]
+        }
+    }
+}
