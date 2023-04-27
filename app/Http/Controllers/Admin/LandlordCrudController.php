@@ -21,7 +21,7 @@ class LandlordCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -33,7 +33,7 @@ class LandlordCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -51,39 +51,52 @@ class LandlordCrudController extends CrudController
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
+         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
     }
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
     protected function setupCreateOperation()
     {
+        $this->crud->setCreateView('backpack::landlord.create');
         CRUD::setValidation(LandlordRequest::class);
 
-        CRUD::field('name');
-        CRUD::field('display_name');
+        CRUD::field('name')->wrapper(['class' => 'form-group col-6']);
+        CRUD::field('display_name')->wrapper(['class' => 'form-group col-6']);
+        CRUD::field('separator')->type('separator');
         CRUD::field('phone');
         CRUD::field('email');
         CRUD::field('bank_name');
         CRUD::field('bank_account_name');
         CRUD::field('bank_account_number');
-        CRUD::field('user');
+        CRUD::addField([   // Switch
+            'name'  => 'switch',
+            'type'  => 'switch',
+            'label'    => 'Did you want to create user to this landlord?',
+
+            // optional
+            'color'    => 'success', // May be any bootstrap color class or an hex color
+            'onLabel' => '✓',
+            'offLabel' => '✕',
+        ],);
+
+
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
+         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
          */
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

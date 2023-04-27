@@ -10,10 +10,16 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('receipt') }}"><i class="nav-icon la la-question"></i> Receipts</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('tenant') }}"><i class="nav-icon la la-question"></i> Tenants</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('unit') }}"><i class="nav-icon la la-question"></i> Units</a></li>
-<li class="nav-item"><a class="nav-link" href="{{ backpack_url('user') }}"><i class="nav-icon la la-question"></i> Users</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('type') }}"><i class="nav-icon la la-question"></i> Types</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('property') }}"><i class="nav-icon la la-question"></i> Properties</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('reciept') }}"><i class="nav-icon la la-question"></i> Reciepts</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('document') }}"><i class="nav-icon la la-question"></i> Documents</a></li>
 
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('user') }}'><i class='nav-icon la la-user'></i> <span>Users</span></a></li>
+<li class="nav-item nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-users"></i> Authentication</a>
+    <ul class="nav-dropdown-items">
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('user') }}"><i class="nav-icon la la-user"></i> <span>Users</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('role') }}"><i class="nav-icon la la-id-badge"></i> <span>Roles</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('permission') }}"><i class="nav-icon la la-key"></i> <span>Permissions</span></a></li>
+    </ul>
+</li>
