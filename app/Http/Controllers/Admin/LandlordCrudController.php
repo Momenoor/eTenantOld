@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\LandlordRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Backpack\CRUD\app\Library\Widget;
 
 /**
  * Class LandlordCrudController
@@ -63,19 +64,20 @@ class LandlordCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        $this->crud->setCreateView('backpack::landlord.create');
+        Widget::add()->type('script')->content(asset('assets/js/custom/create-user-switch.js'));
         CRUD::setValidation(LandlordRequest::class);
-
-        CRUD::field('name')->wrapper(['class' => 'form-group col-6']);
-        CRUD::field('display_name')->wrapper(['class' => 'form-group col-6']);
+        CRUD::field('name')->size(6);
         CRUD::field('separator')->type('separator');
-        CRUD::field('phone');
-        CRUD::field('email');
-        CRUD::field('bank_name');
-        CRUD::field('bank_account_name');
-        CRUD::field('bank_account_number');
+        CRUD::field('display_name')->size(6);
+        CRUD::field('clearfix')->type('clearfix');
+        CRUD::field('phone')->size(6);
+        CRUD::field('email')->size(6);
+        CRUD::field('bank_name')->size(4);
+        CRUD::field('bank_account_name')->size(4);
+        CRUD::field('bank_account_number')->size(4);
+        CRUD::field('separator2')->type('separator');
         CRUD::addField([   // Switch
-            'name'  => 'switch',
+            'name'  => 'create_user_switch',
             'type'  => 'switch',
             'label'    => 'Did you want to create user to this landlord?',
 
@@ -84,6 +86,8 @@ class LandlordCrudController extends CrudController
             'onLabel' => '✓',
             'offLabel' => '✕',
         ],);
+        CRUD::field('user.name')->type('text')->wrapper(['class' => 'form-group col-6 required'])->label('Name');
+        CRUD::field('user.email')->type('text')->wrapper(['class' => 'form-group col-6 required'])->label('Email');
 
 
 
@@ -102,6 +106,28 @@ class LandlordCrudController extends CrudController
      */
     protected function setupUpdateOperation()
     {
+
         $this->setupCreateOperation();
+        CRUD::Field('create_user_switch')->remove();
+        if ($this->crud->getCurrentEntry()->user) {
+            CRUD::modifyField('user.name', [
+                'attributes' => [
+                    'class' => 'form-control-plaintext',
+                    'readonly'    => 'readonly',
+                    'disabled'    => 'disabled',
+                ],
+            ]);
+            CRUD::modifyField('user.email', [
+                'attributes' => [
+                    'class' => 'form-control-plaintext',
+                    'readonly'    => 'readonly',
+                    'disabled'    => 'disabled',
+                ],
+            ]);
+        } else {
+            CRUD::field('user.name')->remove();
+            CRUD::field('user.email')->remove();
+            CRUD::field('separator2')->remove();
+        }
     }
 }

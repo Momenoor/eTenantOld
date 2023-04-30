@@ -24,16 +24,23 @@ class LandlordRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules =  [
             'name' => 'required|string',
             'display_name' => 'nullable|nullable|string',
-            'phone' => 'nullable|nullable|string',
-            'email' => 'nullable|nullable|email',
-            'bank_name' => 'nullable|nullable|string',
-            'bank_account_name' => 'nullable|nullable|string',
-            'bank_account_number' => 'nullable|nullable|string',
-            'user' => 'required|integer|exists:users,id',
+            'phone' => 'required|nullable|nullable|string',
+            'email' => 'required|nullable|nullable|email',
+            'bank_name' => 'required|nullable|nullable|string',
+            'bank_account_name' => 'required|nullable|nullable|string',
+            'bank_account_number' => 'required|nullable|nullable|string',
+            'user.name' => 'required_if:create_user_switch,true|string',
+            'user.email' => 'required_if:create_user_switch,true|email|unique:users,email',
         ];
+
+        if ($this->isMethod('put')) {
+            $rules['user.email'] = 'required_if:create_user_switch,true|email|unique:users,email,' . $this->user->id . ',id';
+        }
+
+        return $rules;
     }
 
     /**
