@@ -13,6 +13,7 @@ class Property extends Model
     use CrudTrait;
     use HasFactory;
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -43,11 +44,6 @@ class Property extends Model
         'landlord_id' => 'integer',
     ];
 
-    public function type(): BelongsTo
-    {
-        return $this->belongsTo(Type::class);
-    }
-
     public function landlord(): BelongsTo
     {
         return $this->belongsTo(Landlord::class);
@@ -56,5 +52,10 @@ class Property extends Model
     public function documents(): MorphMany
     {
         return $this->morphMany(Document::class, 'documentable');
+    }
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(Type::class)->property();
     }
 }

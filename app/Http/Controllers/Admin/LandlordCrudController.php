@@ -86,8 +86,15 @@ class LandlordCrudController extends CrudController
             'onLabel' => '✓',
             'offLabel' => '✕',
         ],);
-        CRUD::field('user.name')->type('text')->wrapper(['class' => 'form-group col-6 required'])->label('Name');
-        CRUD::field('user.email')->type('text')->wrapper(['class' => 'form-group col-6 required'])->label('Email');
+        CRUD::field('user.name')
+            ->type('text')
+            ->wrapper(['class' => 'form-group col-6 required'])
+            ->label('Name');
+
+        CRUD::field('user.email')
+            ->type('text')
+            ->wrapper(['class' => 'form-group col-6 required'])
+            ->label('Email');
 
 
 

@@ -49,7 +49,11 @@ return [
 
     // CSS files that are loaded in all pages, using Laravel's asset() helper
     'styles' => [
-        'packages/backpack/base/css/bundle.css', // has primary color electric purple (backpack default)
+        //'packages/backpack/base/css/bundle.css', // has primary color electric purple (backpack default)
+        'assets/plugins/custom/fullcalendar/fullcalendar.bundle.css',
+        'assets/plugins/custom/datatables/datatables.bundle.css',
+        'assets/plugins/global/plugins.bundle.css',
+        'assets/css/style.bundle.css',
         // 'packages/backpack/base/css/blue-bundle.css', // has primary color blue
 
         // Here's what's inside the bundle:
@@ -85,13 +89,14 @@ return [
     // ------
 
     // Menu logo. You can replace this with an <img> tag if you have a logo.
-    'project_logo'   => '<b>Back</b>pack',
+    'project_logo'   => '<img alt="Logo" src="'.asset('assets/media/logos/demo46.svg') .'" class="d-none d-sm-block" />
+    <img alt="Logo" src="'. asset('assets/media/logos/demo46-small.svg') .'" class="d-block d-sm-none" />',
 
     // Show / hide breadcrumbs on admin panel pages.
     'breadcrumbs' => true,
 
     // Horizontal navbar classes. Helps make the admin panel look similar to your project's design.
-    'header_class' => 'app-header bg-light border-0 navbar',
+    'header_class' => 'app-header',
     // For background colors use: bg-dark, bg-primary, bg-secondary, bg-danger, bg-warning, bg-success, bg-info, bg-blue, bg-light-blue, bg-indigo, bg-purple, bg-pink, bg-red, bg-orange, bg-yellow, bg-green, bg-teal, bg-cyan, bg-white
     // For links to be visible on different background colors use: "navbar-dark", "navbar-light", "navbar-color"
 
@@ -100,7 +105,7 @@ return [
     // ----
 
     // Body element classes.
-    'body_class' => 'app aside-menu-fixed sidebar-lg-show',
+    'body_class' => 'app-default',
     // Try sidebar-hidden, sidebar-fixed, sidebar-compact, sidebar-lg-show
 
     // Sidebar element classes.
@@ -134,7 +139,14 @@ return [
     // JS files that are loaded in all pages, using Laravel's asset() helper
     'scripts' => [
         // Backstrap includes jQuery, Bootstrap, CoreUI, PNotify, Popper
+        'assets/plugins/global/plugins.bundle.js',
+        'assets/js/scripts.bundle.js',
+        'assets/plugins/custom/fullcalendar/fullcalendar.bundle.js',
         'packages/backpack/base/js/bundle.js',
+        'assets/plugins/custom/datatables/datatables.bundle.js',
+        'assets/js/widgets.bundle.js',
+        'assets/js/custom/widgets.js',
+        'assets/js/custom/apps/chat/chat.js',
 
         // examples (everything inside the bundle, loaded from CDN)
         // 'https://code.jquery.com/jquery-3.4.1.min.js',

@@ -37,7 +37,9 @@ class LandlordRequest extends FormRequest
         ];
 
         if ($this->isMethod('put')) {
-            $rules['user.email'] = 'required_if:create_user_switch,true|email|unique:users,email,' . $this->user->id . ',id';
+            if ($this->user) {
+                $rules['user.email'] = 'required_if:create_user_switch,true|email|unique:users,email,' . $this->user->id . ',id';
+            }
         }
 
         return $rules;
