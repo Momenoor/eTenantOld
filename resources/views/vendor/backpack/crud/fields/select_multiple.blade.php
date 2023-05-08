@@ -12,12 +12,12 @@
     if (is_a($field['value'], \Illuminate\Support\Collection::class)) {
         $field['value'] = $field['value']->pluck(app($field['model'])->getKeyName())->toArray();
     }
-    
+
 @endphp
 
 @include('crud::fields.inc.wrapper_start')
 
-    <label>{!! $field['label'] !!}</label>
+@include('crud::fields.inc.label')
     @include('crud::fields.inc.translatable_icon')
     {{-- To make sure a value gets submitted even if the "select multiple" is empty, we need a hidden input --}}
     <input type="hidden" name="{{ $field['name'] }}" value="" @if(in_array('disabled', $field['attributes'] ?? [])) disabled @endif />

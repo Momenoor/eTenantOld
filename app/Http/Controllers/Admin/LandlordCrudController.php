@@ -49,13 +49,17 @@ class LandlordCrudController extends CrudController
         CRUD::column('bank_account_number');
         CRUD::column('user');
 
+
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
     }
+    protected function setupShowOperation(){
+        $this->setupListOperation();
 
+    }
     /**
      * Define what happens when the Create operation is loaded.
      *
@@ -88,12 +92,12 @@ class LandlordCrudController extends CrudController
         ],);
         CRUD::field('user.name')
             ->type('text')
-            ->wrapper(['class' => 'form-group col-6 required'])
+            ->size(6)
             ->label('Name');
 
         CRUD::field('user.email')
             ->type('text')
-            ->wrapper(['class' => 'form-group col-6 required'])
+            ->size(6)
             ->label('Email');
 
 

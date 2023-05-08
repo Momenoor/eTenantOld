@@ -13,7 +13,7 @@ $value = $timestamp ? date('Y-m-d\TH:i:s', $timestamp) : '';
 @endphp
 
 @include('crud::fields.inc.wrapper_start')
-    <label>{!! $field['label'] !!}</label>
+@include('crud::fields.inc.label')
     @include('crud::fields.inc.translatable_icon')
 
     @if(isset($field['prefix']) || isset($field['suffix'])) <div class="input-group"> @endif
@@ -26,7 +26,7 @@ $value = $timestamp ? date('Y-m-d\TH:i:s', $timestamp) : '';
         >
         @if(isset($field['suffix'])) <div class="input-group-append"><span class="input-group-text">{!! $field['suffix'] !!}</span></div> @endif
     @if(isset($field['prefix']) || isset($field['suffix'])) </div> @endif
-    
+
     {{-- HINT --}}
     @if (isset($field['hint']))
         <p class="help-block">{!! $field['hint'] !!}</p>

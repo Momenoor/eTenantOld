@@ -6,7 +6,7 @@
 
 {{-- text input --}}
 @include('crud::fields.inc.wrapper_start')
-    <label>{!! $field['label'] !!}</label>
+@include('crud::fields.inc.label')
     @include('crud::fields.inc.translatable_icon')
 
 	{{-- Show the file name and a "Clear" button on EDIT form. --}}
@@ -169,9 +169,9 @@
 
             element.on('CrudField:disable', function(e) {
               element.children('.backstrap-file').find('input').prop('disabled', 'disabled');
-              
+
               let $deleteButton = element.children('.existing-file').children('a.file_clear_button');
-              
+
               if($deleteButton.length > 0) {
                 $deleteButton.on('click.prevent', function(e) {
                     e.stopImmediatePropagation();

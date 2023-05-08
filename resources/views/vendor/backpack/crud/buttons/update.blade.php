@@ -2,7 +2,10 @@
 	@if (!$crud->model->translationEnabled())
 
 	{{-- Single edit button --}}
-	<a href="{{ url($crud->route.'/'.$entry->getKey().'/edit') }}" class="btn btn-sm btn-link"><i class="la la-edit"></i> {{ trans('backpack::crud.edit') }}</a>
+	<a href="{{ url($crud->route.'/'.$entry->getKey().'/edit') }}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"><i class="ki-duotone ki-pencil fs-2">
+        <span class="path1"></span>
+        <span class="path2"></span>
+    </i></a>
 
 	@else
 

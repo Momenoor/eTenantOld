@@ -2,9 +2,9 @@
 
 @php
     $defaultBreadcrumbs = [
-      trans('backpack::crud.admin') => url(config('backpack.base.route_prefix'), 'dashboard'),
-      $crud->entity_name_plural => url($crud->route),
-      trans('backpack::crud.reorder') => false,
+        trans('backpack::crud.admin') => url(config('backpack.base.route_prefix'), 'dashboard'),
+        $crud->entity_name_plural => url($crud->route),
+        trans('backpack::crud.reorder') => false,
     ];
 
     // if breadcrumbs aren't defined in the CrudController, use the default breadcrumbs
@@ -12,15 +12,20 @@
 @endphp
 
 @section('header')
-    <div class="container-fluid">
-        <h2>
-            <span class="text-capitalize">{!! $crud->getHeading() ?? $crud->entity_name_plural !!}</span>
-            <small>{!! $crud->getSubheading() ?? trans('backpack::crud.reorder').' '.$crud->entity_name_plural !!}.</small>
+    <div class="d-flex flex-stack flex-row-fluid">
+        {{-- begin::Toolbar container --}}
+        <div class="d-flex flex-column flex-row-fluid">
+            <h2>
+                <span class="text-capitalize">{!! $crud->getHeading() ?? $crud->entity_name_plural !!}</span>
+                <small>{!! $crud->getSubheading() ?? trans('backpack::crud.reorder') . ' ' . $crud->entity_name_plural !!}.</small>
 
-            @if ($crud->hasAccess('list'))
-                <small><a href="{{ url($crud->route) }}" class="d-print-none font-sm"><i class="la la-angle-double-left"></i> {{ trans('backpack::crud.back_to_all') }} <span>{{ $crud->entity_name_plural }}</span></a></small>
-            @endif
-        </h2>
+                @if ($crud->hasAccess('list'))
+                    <small><a href="{{ url($crud->route) }}" class="d-print-none font-sm"><i
+                                class="la la-angle-double-left"></i> {{ trans('backpack::crud.back_to_all') }}
+                            <span>{{ $crud->entity_name_plural }}</span></a></small>
+                @endif
+            </h2>
+        </div>
     </div>
 @endsection
 
@@ -28,14 +33,14 @@
     <?php
     function tree_element($entry, $key, $all_entries, $crud)
     {
-        if (! isset($entry->tree_element_shown)) {
+        if (!isset($entry->tree_element_shown)) {
             // mark the element as shown
             $all_entries[$key]->tree_element_shown = true;
             $entry->tree_element_shown = true;
 
             // show the tree element
-            echo '<li id="list_'.$entry->getKey().'">';
-            echo '<div><span class="disclose"><span></span></span>'.object_get($entry, $crud->get('reorder.label')).'</div>';
+            echo '<li id="list_' . $entry->getKey() . '">';
+            echo '<div><span class="disclose"><span></span></span>' . object_get($entry, $crud->get('reorder.label')) . '</div>';
 
             // see if this element has any children
             $children = [];
@@ -70,19 +75,22 @@
 
                 <ol class="sortable mt-0">
                     <?php
-                    $all_entries = collect($entries->all())->sortBy('lft')->keyBy($crud->getModel()->getKeyName());
-    $root_entries = $all_entries->filter(function ($item) {
-        return $item->parent_id == 0;
-    });
-    foreach ($root_entries as $key => $entry) {
-        $root_entries[$key] = tree_element($entry, $key, $all_entries, $crud);
-    }
-    ?>
+                    $all_entries = collect($entries->all())
+                        ->sortBy('lft')
+                        ->keyBy($crud->getModel()->getKeyName());
+                    $root_entries = $all_entries->filter(function ($item) {
+                        return $item->parent_id == 0;
+                    });
+                    foreach ($root_entries as $key => $entry) {
+                        $root_entries[$key] = tree_element($entry, $key, $all_entries, $crud);
+                    }
+                    ?>
                 </ol>
 
             </div>{{-- /.card --}}
 
-            <button id="toArray" class="btn btn-success" data-style="zoom-in"><i class="la la-save"></i> {{ trans('backpack::crud.save') }}</button>
+            <button id="toArray" class="btn btn-success" data-style="zoom-in"><i class="la la-save"></i>
+                {{ trans('backpack::crud.save') }}</button>
         </div>
     </div>
 @endsection
@@ -93,9 +101,9 @@
         .ui-sortable .placeholder {
             outline: 1px dashed #4183C4;
             /*-webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 3px;
-            margin: -1px;*/
+                -moz-border-radius: 3px;
+                border-radius: 3px;
+                margin: -1px;*/
         }
 
         .ui-sortable .mjs-nestedSortable-error {
@@ -109,7 +117,8 @@
             padding-left: 30px;
         }
 
-        ol.sortable, ol.sortable ol {
+        ol.sortable,
+        ol.sortable ol {
             margin: 0 0 0 25px;
             padding: 0;
             list-style-type: none;
@@ -124,7 +133,7 @@
             padding: 0;
         }
 
-        .sortable li div  {
+        .sortable li div {
             border: 1px solid #ddd;
             -webkit-border-radius: 3px;
             -moz-border-radius: 3px;
@@ -158,19 +167,19 @@
             display: none;
         }
 
-        .sortable li.mjs-nestedSortable-collapsed > ol {
+        .sortable li.mjs-nestedSortable-collapsed>ol {
             display: none;
         }
 
-        .sortable li.mjs-nestedSortable-branch > div > .disclose {
+        .sortable li.mjs-nestedSortable-branch>div>.disclose {
             display: inline-block;
         }
 
-        .sortable li.mjs-nestedSortable-collapsed > div > .disclose > span:before {
+        .sortable li.mjs-nestedSortable-collapsed>div>.disclose>span:before {
             content: '+ ';
         }
 
-        .sortable li.mjs-nestedSortable-expanded > div > .disclose > span:before {
+        .sortable li.mjs-nestedSortable-expanded>div>.disclose>span:before {
             content: '- ';
         }
 
@@ -189,10 +198,15 @@
 
         .ui-sortable h3 {
             font-size: 1em;
-            margin: 1em 0 .3em;;
+            margin: 1em 0 .3em;
+            ;
         }
 
-        .ui-sortable p, .ui-sortable ol, .ui-sortable ul, .ui-sortable pre, .ui-sortable form {
+        .ui-sortable p,
+        .ui-sortable ol,
+        .ui-sortable ul,
+        .ui-sortable pre,
+        .ui-sortable form {
             margin-top: 0;
             margin-bottom: 1em;
         }
@@ -221,14 +235,15 @@
 @endsection
 
 @section('after_scripts')
-    <script src="{{ asset('packages/jquery-ui-dist/jquery-ui.min.js') }}" type="text/javascript" ></script>
-    <script src="{{ asset('packages/nestedSortable/jquery.mjs.nestedSortable2.js') }}" type="text/javascript" ></script>
+    <script src="{{ asset('packages/jquery-ui-dist/jquery-ui.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('packages/nestedSortable/jquery.mjs.nestedSortable2.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
         jQuery(document).ready(function($) {
-            var isRtl = Boolean("{{ (config('backpack.base.html_direction') === 'rtl') ? true : false }}");
-            if(isRtl) {
-                $( " <style> .ui-sortable ol {margin: 0;padding: 0;padding-right: 30px;}ol.sortable, ol.sortable ol {margin: 0 25px 0 0;padding: 0;list-style-type: none;}.ui-sortable dd {margin: 0;padding: 0 1.5em 0 0;}</style>" ).appendTo( "head" )
+            var isRtl = Boolean("{{ config('backpack.base.html_direction') === 'rtl' ? true : false }}");
+            if (isRtl) {
+                $(" <style> .ui-sortable ol {margin: 0;padding: 0;padding-right: 30px;}ol.sortable, ol.sortable ol {margin: 0 25px 0 0;padding: 0;list-style-type: none;}.ui-sortable dd {margin: 0;padding: 0 1.5em 0 0;}</style>")
+                    .appendTo("head")
             }
             // initialize the nested sortable plugin
             $('.sortable').nestedSortable({
@@ -250,22 +265,28 @@
             });
 
             $('.disclose').on('click', function() {
-                $(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded');
+                $(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass(
+                    'mjs-nestedSortable-expanded');
             });
 
-            $('#toArray').click(function(e){
+            $('#toArray').click(function(e) {
                 // get the current tree order
-                arraied = $('ol.sortable').nestedSortable('toArray', {startDepthCount: 0, expression: /(.+)_(.+)/ });
+                arraied = $('ol.sortable').nestedSortable('toArray', {
+                    startDepthCount: 0,
+                    expression: /(.+)_(.+)/
+                });
 
                 // log it
                 //console.log(arraied);
 
                 // send it with POST
                 $.ajax({
-                    url: '{{ url(Request::path()) }}',
-                    type: 'POST',
-                    data: { tree: JSON.stringify(arraied) },
-                })
+                        url: '{{ url(Request::path()) }}',
+                        type: 'POST',
+                        data: {
+                            tree: JSON.stringify(arraied)
+                        },
+                    })
                     .done(function() {
                         new Noty({
                             type: "success",
