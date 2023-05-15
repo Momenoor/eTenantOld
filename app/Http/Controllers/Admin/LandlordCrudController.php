@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\LandlordRequest;
 use App\Models\Landlord;
-use App\Models\Property;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Backpack\CRUD\app\Library\Widget;
@@ -148,10 +147,6 @@ class LandlordCrudController extends CrudController
     public function showTable(Landlord $landlord)
     {
         $this->crud->hasAccessOrFail('show');
-
-        // get entry ID from Request (makes sure its the last ID for nested resources)
-        //$this->crud->removeColumn('user');
-
 
         $this->data['entry'] = $landlord;
         $this->data['crud'] = $this->crud;
