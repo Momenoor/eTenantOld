@@ -10,6 +10,7 @@ class Menu extends MenuItem
 {
     use HasFactory;
 
+    protected $with = ['parent','children'];
     public function hasChildren()
     {
         return $this->children()->exists();

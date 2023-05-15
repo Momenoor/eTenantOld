@@ -11,9 +11,7 @@ class UserObserver
     {
 
         if (!$user->password) {
-            $user->password = Hash::make(123456);
-        } else {
-            $user->password = Hash::make($user->password);
+            $user->password = 123456;
         }
     }
 }

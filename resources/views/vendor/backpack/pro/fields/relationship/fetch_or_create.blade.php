@@ -139,7 +139,7 @@
                 data-inline-allow-create="{{var_export($activeInlineCreate)}}"
             @endif
 
-            @include('crud::fields.inc.attributes', ['default_class' =>  'form-control select2_field'])
+            @include('crud::fields.inc.attributes', ['default_class' =>  'form-select form-select-solid form-select-lg fw-semibold'])
 
             @if($field['multiple'])
             multiple
@@ -165,15 +165,9 @@
 
     @include('crud::fields.inc.wrapper_end')
 
-    @push('crud_fields_styles')
-        @loadOnce('packages/select2/dist/css/select2.min.css')
-        @loadOnce('packages/select2-bootstrap-theme/dist/select2-bootstrap.min.css')
-    @endpush
-
     {{-- FIELD JS - will be loaded in the after_scripts section --}}
     @push('crud_fields_scripts')
     {{-- include select2 js --}}
-    @loadOnce('packages/select2/dist/js/select2.full.min.js')
     @loadOnce('bpFieldInitFetchOrCreateElement')
     @if (app()->getLocale() !== 'en')
         @loadOnce('packages/select2/dist/js/i18n/' . str_replace('_', '-', app()->getLocale()) . '.js')
@@ -511,7 +505,7 @@
         if (!element.hasClass("select2-hidden-accessible")) {
 
             element.select2({
-                theme: "bootstrap",
+
                 placeholder: $placeholder,
                 minimumInputLength: $minimumInputLength,
                 allowClear: $allows_null,

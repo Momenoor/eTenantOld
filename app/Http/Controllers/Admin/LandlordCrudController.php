@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\LandlordRequest;
+use App\Models\Landlord;
+use App\Models\Property;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Backpack\CRUD\app\Library\Widget;
@@ -19,6 +21,7 @@ class LandlordCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -48,7 +51,7 @@ class LandlordCrudController extends CrudController
         CRUD::column('bank_account_name');
         CRUD::column('bank_account_number');
         CRUD::column('user');
-
+        CRUD::addButton('line', 'addProperty', 'view', 'crud::buttons.add_property', 'beginning');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -56,9 +59,9 @@ class LandlordCrudController extends CrudController
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
     }
-    protected function setupShowOperation(){
+    protected function setupShowOperation()
+    {
         $this->setupListOperation();
-
     }
     /**
      * Define what happens when the Create operation is loaded.
@@ -140,5 +143,20 @@ class LandlordCrudController extends CrudController
             CRUD::field('user.email')->remove();
             CRUD::field('separator2')->remove();
         }
+    }
+
+    public function showTable(Landlord $landlord)
+    {
+        $this->crud->hasAccessOrFail('show');
+
+        // get entry ID from Request (makes sure its the last ID for nested resources)
+        //$this->crud->removeColumn('user');
+
+
+        $this->data['entry'] = $landlord;
+        $this->data['crud'] = $this->crud;
+        $this->data['title'] = $this->crud->getTitle() ?? trans('backpack::crud.preview') . ' ' . $this->crud->entity_name;
+        $this->crud->removeAllButtons();
+        return view('crud::show_table', $this->data);
     }
 }

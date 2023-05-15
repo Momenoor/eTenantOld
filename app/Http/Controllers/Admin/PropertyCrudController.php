@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\TypeEnum;
 use App\Http\Requests\PropertyRequest;
-use App\Models\Type;
+use App\Models\Landlord;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Backpack\CRUD\app\Library\Widget;
 
 /**
  * Class PropertyCrudController
@@ -21,6 +21,7 @@ class PropertyCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
+    protected $relatedEnitny;
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
      *
@@ -41,6 +42,7 @@ class PropertyCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        CRUD::column('landlord');
         CRUD::column('code');
         CRUD::column('name');
         CRUD::column('floor_count');
@@ -51,13 +53,17 @@ class PropertyCrudController extends CrudController
         CRUD::column('emirate');
         CRUD::column('description');
         CRUD::column('type');
-        CRUD::column('landlord');
+
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
+    }
+    protected function setupShowOperation()
+    {
+        $this->setupListOperation();
     }
 
     /**
@@ -68,23 +74,40 @@ class PropertyCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
+
         CRUD::setValidation(PropertyRequest::class);
-        CRUD::field('landlord')->size(6);
-        CRUD::field('fix')->type('clearfix');
-        CRUD::field('code')->size(2);
-        CRUD::field('name')->size(6);
-        CRUD::field('floor_count');
-        CRUD::field('makani');
-        CRUD::field('premises');
-        CRUD::field('condition');
-        CRUD::field('address');
-        CRUD::field('emirate');
-        CRUD::field('description');
+
+
+        CRUD::field('landlord');
         CRUD::field('type')->options(
             (function ($query) {
                 return $query->property()->get();
             }),
-        );
+        )->size(6);
+        CRUD::field('fix')->type('clearfix');
+        CRUD::field('code')->size(3);
+        CRUD::field('name')->size(6);
+        CRUD::field('fix1')->type('clearfix');
+        CRUD::field('floor_count')->type('dialer')->size(2);
+        CRUD::field('makani')->size(3);
+        CRUD::field('premises')->size(3);
+        CRUD::field('description')->size(8);
+        CRUD::field('condition')->size(8);
+
+        CRUD::field('emirate')->type('select2_from_array')->options(
+            [
+                'Dubai' => 'Dubai',
+                'Abu Dhabi' => 'Abu Dhabi',
+                'Sharjah' => 'Sharjah',
+                'Ajman' => 'Ajman',
+                'Umm Al Quwain' => 'Umm Al Quwain',
+                'Ras Al Khaimah' => 'Ras Al Khaimah',
+                'Fujairah' => 'Fujairah',
+            ]
+        )->size(6);
+        CRUD::field('address')->size(8);
+
+
 
 
         /**
@@ -103,5 +126,17 @@ class PropertyCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function createFromLandlord(Landlord $landlord)
+    {
+        CRUD::modifyField('landlord', ['type' => 'hidden', 'value' => $landlord->id]);
+        $this->data['crud'] = $this->crud;
+        $this->data['related'] = $landlord;
+        $this->data['saveAction'] = $this->crud->getSaveAction();
+        $this->data['title'] = $this->crud->getTitle() ?? trans('backpack::crud.add') . ' ' . $this->crud->entity_name;
+
+        // load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package
+        return view('crud::related_create', $this->data);
     }
 }

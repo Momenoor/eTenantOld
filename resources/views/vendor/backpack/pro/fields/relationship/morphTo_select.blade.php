@@ -1,8 +1,8 @@
 @php
 $field['type'] = 'relationship.morphTo_select';
 $optionsForModels = [];
-foreach($field['morphOptions'] as $model => $modelOptions) { 
-    
+foreach($field['morphOptions'] as $model => $modelOptions) {
+
     if(isset($modelOptions['data_source']) || ($modelOptions['ajax'] ?? false)) {
         continue;
     }
@@ -10,7 +10,7 @@ foreach($field['morphOptions'] as $model => $modelOptions) {
     if(!is_a($model, 'Illuminate\Database\Eloquent\Model', true)) {
         $model = $field['morphMap'][$model];
     }
-    
+
     $modelInstance = new $model;
     $modelAttribute = $modelOptions['attribute'] ?? $modelInstance->identifiableAttribute();
     if(isset($modelOptions['options']) && is_array($modelOptions['options'])) {
@@ -39,11 +39,11 @@ $currentValue = old_empty_or_null($field['name'], '') ?? $field['value'] ?? $fie
         data-morph-map={{json_encode($field['morphMap'])}}
         data-tmp-name="{{ $field['name'] }}"
 
-        @foreach($optionsForModels as $key => $ids) 
+        @foreach($optionsForModels as $key => $ids)
             morph-model-options-{{ $key }}="{{ json_encode($ids) }}"
         @endforeach
 
-        @include('crud::fields.inc.attributes', ['default_class' =>  'form-control'])
+        @include('crud::fields.inc.attributes', ['default_class' =>  'form-select form-select-solid form-select-lg fw-semibold'])
         >
         <option value="">-</option>
     </select>
@@ -58,16 +58,10 @@ $currentValue = old_empty_or_null($field['name'], '') ?? $field['value'] ?? $fie
 {{-- Extra CSS and JS for this particular field --}}
 {{-- If a field type is shown multiple times on a form, the CSS and JS will only be loaded once --}}
     {{-- FIELD CSS - will be loaded in the after_styles section --}}
-    @push('crud_fields_styles')
-        <!-- include select2 css-->
-        @loadOnce('packages/select2/dist/css/select2.min.css')
-        @loadOnce('packages/select2-bootstrap-theme/dist/select2-bootstrap.min.css')
-    @endpush
 
     {{-- FIELD JS - will be loaded in the after_scripts section --}}
     @push('crud_fields_scripts')
     <!-- include select2 js-->
-        @loadOnce('packages/select2/dist/js/select2.full.min.js')
         @if (app()->getLocale() !== 'en')
             @loadOnce('packages/select2/dist/js/i18n/' . str_replace('_', '-', app()->getLocale()) . '.js')
         @endif
@@ -84,9 +78,9 @@ if (typeof processItemText !== 'function') {
         var $emptyTranslation = '{{ trans("backpack::crud.empty_translations") }}';
         var $itemField = $morphIdFieldAttribute !== null ? item[$morphIdFieldAttribute] ?? item : item;
         if(typeof $itemField === 'string') {
-            try {  
-                $itemField = JSON.parse($itemField);  
-            } catch (e) {  
+            try {
+                $itemField = JSON.parse($itemField);
+            } catch (e) {
                 return $itemField
             }
         }
@@ -104,20 +98,20 @@ if (typeof processItemText !== 'function') {
      * @return void
      */
     function bpFieldInitMorphToSelectElement(element) {
-        
+
         let isFieldInline = element.data('field-is-inline');
         let placeholder = element.data('placeholder');
-        let morphTypeSelect = $('['+element.data('morph-select')+']');        
+        let morphTypeSelect = $('['+element.data('morph-select')+']');
 
         const addOptionsInSelectFor = function(select, model) {
             let options = JSON.parse(select.attr('morph-model-options-'+model))
             let attribute = select.attr('morph-model-attribute-'+model)
             let elementCurrentValue = select.data('current-value');
-            
+
             for (const [index, value] of Object.entries(options)) {
                 let optionText = processItemText(value);
                 var selected = false;
-               
+
                 if(elementCurrentValue == index) {
                     selected = true;
                 }
@@ -141,9 +135,9 @@ if (typeof processItemText !== 'function') {
 
             }
         }
-        
+
         let select2Settings = {
-                theme: 'bootstrap',
+
                 multiple: false,
                 placeholder: placeholder,
                 allowClear: true,

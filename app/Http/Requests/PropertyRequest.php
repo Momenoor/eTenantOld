@@ -32,7 +32,7 @@ class PropertyRequest extends FormRequest
             'premises' => 'nullable|nullable|string',
             'condition' => 'nullable|nullable|string',
             'address' => 'nullable|nullable|string',
-            'emirate' => 'required|in:abu dhabi,dubai,sharjah,ajman,ras al khaimah,umm al quwain,fujairah',
+            'emirate' => 'required|in:Abu Dhabi,Dubai,Sharjah,Ajman,Ras Al Khaimah,Umm Al Quwain,Fujairah',
             'description' => 'nullable|nullable|string',
             'type' => 'required|integer|exists:types,id',
             'landlord' => 'required|integer|exists:landlords,id',

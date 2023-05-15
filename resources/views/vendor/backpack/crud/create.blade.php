@@ -33,35 +33,37 @@
 
 @section('content')
     <div class="row">
-        <div class="{{ $crud->getCreateContentClass() }}">
-            {{-- Default box --}}
+        @include(backpack_view('inc.widgets'), [ 'widgets' => app('widgets')->where('section', 'before_inner_content')->toArray()])
+    <div class="{{ $crud->getCreateContentClass() }}">
+        {{-- Default box --}}
 
-            @include('crud::inc.grouped_errors')
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title fs-3 fw-bold">
-                        {!! $crud->getSubheading() ?? trans('backpack::crud.add') . ' ' . $crud->entity_name !!}
-                    </div>
+        @include('crud::inc.grouped_errors')
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title fs-3 fw-bold">
+                    {!! $crud->getSubheading() ?? trans('backpack::crud.add') . ' ' . $crud->entity_name !!}
                 </div>
-                <form method="post" action="{{ url($crud->route) }}"
-                    @if ($crud->hasUploadFields('create')) enctype="multipart/form-data" @endif>
-                    {!! csrf_field() !!}
-                    {{-- load the view from the application if it exists, otherwise load the one in the package --}}
-                    @if (view()->exists('vendor.backpack.crud.form_content'))
-                        @include('vendor.backpack.crud.form_content', [
-                            'fields' => $crud->fields(),
-                            'action' => 'create',
-                        ])
-                    @else
-                        @include('crud::form_content', ['fields' => $crud->fields(), 'action' => 'create'])
-                    @endif
-                    {{-- This makes sure that all field assets are loaded. --}}
-                    <div class="d-none" id="parentLoadedAssets">{{ json_encode(Assets::loaded()) }}</div>
-                    <div class="card-footer">
-                        @include('crud::inc.form_save_buttons')
-                    </div>
-                </form>
             </div>
+            <form method="post" action="{{ url($crud->route) }}"
+                @if ($crud->hasUploadFields('create')) enctype="multipart/form-data" @endif>
+                {!! csrf_field() !!}
+                {{-- load the view from the application if it exists, otherwise load the one in the package --}}
+                @if (view()->exists('vendor.backpack.crud.form_content'))
+                    @include('vendor.backpack.crud.form_content', [
+                        'fields' => $crud->fields(),
+                        'action' => 'create',
+                    ])
+                @else
+                    @include('crud::form_content', ['fields' => $crud->fields(), 'action' => 'create'])
+                @endif
+                {{-- This makes sure that all field assets are loaded. --}}
+                <div class="d-none" id="parentLoadedAssets">{{ json_encode(Assets::loaded()) }}</div>
+                <div class="card-footer">
+                    @include('crud::inc.form_save_buttons')
+                </div>
+            </form>
         </div>
     </div>
+    @include(backpack_view('inc.widgets'), [ 'widgets' => app('widgets')->where('section', 'after_inner_content')->toArray()])
+</div>
 @endsection

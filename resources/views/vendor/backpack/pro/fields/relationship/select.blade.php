@@ -68,7 +68,7 @@
         data-language="{{ str_replace('_', '-', app()->getLocale()) }}"
         data-is-pivot-select={{var_export($field['is_pivot_select'])}}
         bp-field-main-input
-        @include('crud::fields.inc.attributes', ['default_class' =>  'form-control'])
+        @include('crud::fields.inc.attributes', ['default_class' =>  'form-select form-select-solid form-select-lg fw-semibold'])
 
         @if($field['multiple'])
         multiple
@@ -106,8 +106,7 @@
 {{-- FIELD CSS - will be loaded in the after_styles section --}}
 @push('crud_fields_styles')
     {{-- include select2 css --}}
-    @loadOnce('packages/select2/dist/css/select2.min.css')
-    @loadOnce('packages/select2-bootstrap-theme/dist/select2-bootstrap.min.css')
+
     <style type="text/css">
         .select2-search__field {
             width: 100%!important;
@@ -118,7 +117,6 @@
 {{-- FIELD JS - will be loaded in the after_scripts section --}}
 @push('crud_fields_scripts')
     {{-- include select2 js --}}
-    @loadOnce('packages/select2/dist/js/select2.full.min.js')
     @if (app()->getLocale() !== 'en')
         @loadOnce('packages/select2/dist/js/i18n/' . str_replace('_', '-', app()->getLocale()) . '.js')
     @endif
@@ -200,7 +198,7 @@
         };
 
         var $select2Settings = {
-                theme: 'bootstrap',
+
                 multiple: $multiple,
                 placeholder: $placeholder,
                 allowClear: $allowClear,

@@ -30,7 +30,7 @@
         data-include-all-form-fields="{{ isset($field['include_all_form_fields']) ? ($field['include_all_form_fields'] ? 'true' : 'false') : 'false' }}"
         data-ajax-delay="{{ $field['delay'] }}"
         data-language="{{ str_replace('_', '-', app()->getLocale()) }}"
-        @include('crud::fields.inc.attributes', ['default_class' =>  'form-control'])
+        @include('crud::fields.inc.attributes', ['default_class' =>  'form-select form-select-solid form-select-lg fw-semibold'])
         >
 
         @if ($old_value)
@@ -69,9 +69,6 @@
 
     {{-- FIELD CSS - will be loaded in the after_styles section --}}
 @push('crud_fields_styles')
-    {{-- include select2 css --}}
-    @loadOnce('packages/select2/dist/css/select2.min.css')
-    @loadOnce('packages/select2-bootstrap-theme/dist/select2-bootstrap.min.css')
     {{-- allow clear --}}
     @if($field['allows_null'])
         @loadOnce('select2_from_ajax_custom_css')
@@ -87,7 +84,6 @@
     {{-- FIELD JS - will be loaded in the after_scripts section --}}
 @push('crud_fields_scripts')
     {{-- include select2 js --}}
-    @loadOnce('packages/select2/dist/js/select2.full.min.js')
     @if (app()->getLocale() !== 'en')
         @loadOnce('packages/select2/dist/js/i18n/' . str_replace('_', '-', app()->getLocale()) . '.js')
     @endif
@@ -119,7 +115,6 @@
         }
         //init the element
         $(element).select2({
-            theme: 'bootstrap',
             multiple: false,
             placeholder: $placeholder,
             minimumInputLength: $minimumInputLength,
