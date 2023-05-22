@@ -31,14 +31,6 @@ Route::group([
     Route::crud('document', 'DocumentCrudController');
     Route::crud('contract', 'ContractCrudController');
 
-    Route::get('landlord/{landlord}/property', [
-        'as'        => 'landlord.property.create',
-        'uses'      => PropertyCrudController::class . '@createFromLandlord',
-        'operation' => 'create',
-    ]);
-    Route::get('landlord/{landlord}/show/table', [
-        'as'        => 'landlord.show.table',
-        'uses'      => LandlordCrudController::class . '@showTable',
-        'operation' => 'show',
-    ]);
+
+
 }); // this should be the absolute last line of this file

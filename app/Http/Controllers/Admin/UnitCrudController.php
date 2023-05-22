@@ -18,7 +18,15 @@ class UnitCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use \App\Http\Controllers\Admin\Operations\CreateFromRelatedOperation;
 
+
+    public function __construct()
+    {
+
+        $this->createdFrom = 'property';
+        parent::__construct();
+    }
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -40,8 +48,10 @@ class UnitCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('name');
         CRUD::column('code');
+        CRUD::column('name');
+        CRUD::column('floor');
+        CRUD::column('number');
         CRUD::column('area_size');
         CRUD::column('permises');
         CRUD::column('condition');
@@ -66,14 +76,21 @@ class UnitCrudController extends CrudController
     {
         CRUD::setValidation(UnitRequest::class);
 
-        CRUD::field('name');
+        CRUD::field('property');
+        CRUD::field('type')->options(
+            (function ($query) {
+                return $query->unit()->get();
+            }),
+        );
+        CRUD::field('floor');
+        CRUD::field('number');
         CRUD::field('code');
+        CRUD::field('name');
         CRUD::field('area_size');
         CRUD::field('permises');
         CRUD::field('condition');
         CRUD::field('description');
-        CRUD::field('property');
-        CRUD::field('type');
+
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

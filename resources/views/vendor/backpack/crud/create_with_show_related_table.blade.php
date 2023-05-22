@@ -77,7 +77,7 @@
 @push('after_scripts')
     <script>
         $.ajax({
-            url: '{{ route('landlord.show.table', $related) }}',
+            url: '{{ route($route, $related) }}',
             mothod: 'GET',
             success: function(result) {
                 $('#relatedView').html(result);
